@@ -12,6 +12,6 @@ end
 desc 'Run the specs'
 RSpec::Core::RakeTask.new(:rcov) do |t|
   t.pattern = 'spec/*_spec.rb'
-  t.verbose = true
   t.rcov = true
+  t.rcov_opts = %[-Ilib -Ispec --exclude "gems/*,spec/fixtures,spec/spec_helper.rb,spec/nilify_spec.rb"]
 end
