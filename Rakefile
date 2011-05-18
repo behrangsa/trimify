@@ -1,12 +1,12 @@
 require 'rake'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
  
 desc 'Default: run specs.'
 task :default => :spec
  
 desc 'Run the specs'
-Spec::Rake::SpecTask.new(:spec) do |t|
-  t.spec_opts   = ['--colour --format progress --loadby mtime --reverse']
-  t.spec_files  = FileList['spec/*_spec.rb']
-  t.libs       << "lib"
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.pattern = 'spec/*_spec.rb'
+  t.verbose = true
+  t.rcov = true
 end

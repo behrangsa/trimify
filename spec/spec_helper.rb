@@ -1,5 +1,5 @@
 require "rubygems"
-require "spec"
+require "rspec"
 require "sqlite3"
 require "active_record"
 
