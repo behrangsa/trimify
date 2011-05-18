@@ -1,4 +1,4 @@
 class Category < ActiveRecord::Base
-  nilify :title
-  nilify :description
+  trimify :title
+  trimify :description
 end

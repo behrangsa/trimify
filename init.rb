@@ -1,3 +1,3 @@
 require 'nilify'
 
-ActiveRecord::Base.send(:include, Grobie::Nilify)
+ActiveRecord::Base.send(:include, Grobie::Trimify)

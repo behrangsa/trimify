@@ -1,42 +1,44 @@
 module Grobie
-  module Nilify
-
+  module Trimify
     def self.included(base)
       base.extend ClassMethods
     end
 
     module ClassMethods
-      def nilify(*attributes)
-        return if attributes.empty?
+      def trimify(*args)
+        return if args.empty?
         return false unless table_exists?
 
-        unless self.included_modules.include?(Nilify::InstanceMethods)
-          include Nilify::InstanceMethods
-          write_inheritable_attribute :nilify_attributes, []
-          class_inheritable_reader :nilify_attributes
+        options = { :nilify => true }
+        options.merge!(args.pop) if args.last.kind_of? Hash
+
+        unless self.included_modules.include?(Trimify::InstanceMethods)
+          include Trimify::InstanceMethods
+          write_inheritable_attribute :trimify_attributes, {}
+          class_inheritable_reader :trimify_attributes
         end
 
-        attributes = attributes.map(&:to_sym)
-        columns = content_columns.map { |c| c.name.to_sym }.select { |c| attributes.include?(c) }
-        write_inheritable_array :nilify_attributes, columns
+        attributes = args.map(&:to_sym)
+        col_options = {}
+        columns = content_columns.reject { |c| c.type != :string }.map { |c| c.name.to_sym }.select { |c| args.include?(c) }
+        columns.each { |col| col_options[col] = options }
+        write_inheritable_hash :trimify_attributes, col_options
 
-        class_eval "before_validation :nilify"
+        class_eval "before_validation :trimify"
       end
     end
 
     module InstanceMethods
-      def nilify
-        self.class.nilify_attributes.each do |attribute|
-          value = read_attribute(attribute)
-
-          if (value.is_a?(String)  && value.blank?) ||
-             (value.is_a?(Numeric) && value.zero?)  ||
-             (value.is_a?(Time)    && (value.to_i.zero? || (value.to_i + value.utc_offset).zero?))
-            write_attribute(attribute, nil)
+      def trimify
+        self.class.trimify_attributes.each do |attribute, options|
+          value = read_attribute(attribute) 
+          if value.is_a?(String)
+            value.strip!
+            value = nil if (value.blank? && options[:nilify] == true)
+            write_attribute(attribute, value)
           end
         end
       end
     end
-
   end
 end

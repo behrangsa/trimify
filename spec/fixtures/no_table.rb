@@ -1,3 +1,3 @@
 class NoTable < ActiveRecord::Base
-  nilify :attrib
+  trimify :attrib
 end

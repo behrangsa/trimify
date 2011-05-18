@@ -1,28 +1,27 @@
-=Nilify
+=Trimify
 
-Nilify is an ActiveRecord Plugin that allows you to easily convert default values to nil.
-Only attributes you specify will be checked and converted. 
-
-Default values are:
-
-  String:   ""
-  Numeric:  0
-  Time:     1970-01-01 00:00:00
+Trimify is an ActiveRecord Plugin that allows you to easily trim leading and trailing white spaces from string attributes and optionally turn blank strings to nil.
+Only attributes you specify will be checked and converted. Using trimify on non-string attributes has no effect. 
 
 ==Installation
 
-  script/plugin install git://github.com/grobie/nilify.git
+  script/plugin install git://github.com/behrangsa/nilify.git
 
 ==Example
 
   class User < ActiveRecord::Base
-    nilify :name, :salary, :birthday
+    trimify :first_name, :middle_name       
+    trimify :last_name, :nilify => false    # default value of :nilify is true
   end
   
-  user = User.create(:name => "", :salary => 0, :birthday => Time.parse("1970-01-01"))
-  user.name       # => nil
-  user.salary     # => nil
-  user.birthday   # => nil
+  user = User.create(:first_name => " Shompet ", :middle_name = "", :last_name => "")
+  user.first_name   # => "Shompet"
+  user.middle_name  # => nil
+  user.last_name    # => ""
+
+==Acknowledgments
+
+Trimify is inspired by the Nilify plugin, written by Tobias Schmidt.
 
 ==License
 

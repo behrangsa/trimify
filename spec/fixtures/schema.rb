@@ -1,7 +1,9 @@
 ActiveRecord::Schema.define do
 
   create_table :users, :force => true do |t|
-    t.string   :name, :not_null, :type
+    t.string   :first_name, :not_null, :type
+    t.string   :middle_name, :not_null, :type
+    t.string   :last_name, :not_null, :type
     t.integer  :salary
     t.datetime :birthday
   end

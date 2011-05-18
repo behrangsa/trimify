@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-  nilify :name, :salary, :birthday
+  trimify :first_name, :middle_name
+  trimify :last_name, :nilify => false
 end
