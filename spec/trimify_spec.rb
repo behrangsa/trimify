@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Grobie::Trimify do
+describe Behi::Trimify do
 
   it "should add a class method to activerecord" do
     User.methods.should include("trimify")

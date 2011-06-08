@@ -5,7 +5,7 @@ Only attributes you specify will be checked and converted. Using trimify on non-
 
 ==Installation
 
-  script/plugin install git://github.com/behrangsa/nilify.git
+  gem install trimify
 
 ==Example
 
@@ -21,8 +21,8 @@ Only attributes you specify will be checked and converted. Using trimify on non-
 
 ==Acknowledgments
 
-Trimify is inspired by the Nilify plugin, written by Tobias Schmidt.
+Trimify is inspired by the Nilify plugin written by Tobias Schmidt.
 
-==License
+== Copyright
 
-Copyright (c) 2009 Tobias Schmidt, released under the MIT license
+Copyright (c) 2011 Behrang Saeedzadeh, released under the MIT license.

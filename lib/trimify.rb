@@ -1,5 +1,6 @@
-module Grobie
+module Behi
   module Trimify
+    
     def self.included(base)
       base.extend ClassMethods
     end
@@ -7,7 +8,7 @@ module Grobie
     module ClassMethods
       def trimify(*args)
         return if args.empty?
-        return false unless table_exists?
+        return unless table_exists?
 
         options = { :nilify => true }
         options.merge!(args.pop) if args.last.kind_of? Hash
@@ -40,5 +41,10 @@ module Grobie
         end
       end
     end
+    
   end
+end
+
+class ActiveRecord::Base
+  include Behi::Trimify
 end

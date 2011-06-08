@@ -4,7 +4,7 @@ require "sqlite3"
 require "active_record"
 
 # load nilify
-require File.dirname(__FILE__) + '/../init'
+require File.dirname(__FILE__) + '/../lib/trimify'
 
 # establish database connection, define schema and load model
 ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database  => ':memory:'
