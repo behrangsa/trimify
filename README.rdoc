@@ -19,6 +19,10 @@ Only attributes you specify will be checked and converted. Using trimify on non-
   user.middle_name  # => nil
   user.last_name    # => ""
 
+== Status
+
+http://travis-ci.org/behrangsa/trimify.png
+
 ==Acknowledgments
 
 Trimify is inspired by the Nilify plugin written by Tobias Schmidt.
