@@ -19,7 +19,7 @@ Only attributes you specify will be checked and converted. Using trimify on non-
   user.middle_name  # => nil
   user.last_name    # => ""
 
-== Status
+== Continuous Integration
 
 http://travis-ci.org/behrangsa/trimify.png
 
